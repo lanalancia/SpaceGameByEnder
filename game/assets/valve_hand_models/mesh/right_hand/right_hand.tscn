@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccvl85qx2rdj8"]
+
+[ext_resource type="PackedScene" uid="uid://ywd6t88osn0c" path="res://game/assets/valve_hand_models/right_hand.glb" id="1_l1xof"]
+[ext_resource type="Script" path="res://game/assets/valve_hand_models/mesh/right_hand/right_hand.gd" id="2_lcenm"]
+
+[node name="right_hand" instance=ExtResource("1_l1xof")]
+script = ExtResource("2_lcenm")

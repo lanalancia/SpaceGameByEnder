@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://nj7dotgt4bte"]
+
+[ext_resource type="Script" path="res://game/tools/collision_excluder/collision_excluder.gd" id="1_5b71o"]
+
+[node name="CollisionExcluder" type="Node"]
+script = ExtResource("1_5b71o")

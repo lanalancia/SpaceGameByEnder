@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cn0rrlwpbu5xw"]
+
+[ext_resource type="Script" path="res://game/tools/debug/button_visualizer/button_visualizer.gd" id="1_fyg7i"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_4ogip"]
+radius = 0.003
+height = 0.006
+radial_segments = 14
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7gew"]
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2f78l"]
+radius = 0.005
+height = 0.01
+radial_segments = 14
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65s1h"]
+render_priority = 1
+no_depth_test = true
+shading_mode = 0
+
+[node name="ButtonVisualizer" type="Node3D"]
+script = ExtResource("1_fyg7i")
+xr_button_name = "by_button"
+
+[node name="off" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_4ogip")
+surface_material_override/0 = SubResource("StandardMaterial3D_n7gew")
+
+[node name="on" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_2f78l")
+surface_material_override/0 = SubResource("StandardMaterial3D_65s1h")

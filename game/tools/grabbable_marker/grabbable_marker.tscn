@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://8eqiub5m3bua"]
+
+[ext_resource type="Script" path="res://game/tools/grabbable_marker/grabbable_marker.gd" id="1_cn67h"]
+
+[node name="GrabbableMarker" type="Node"]
+script = ExtResource("1_cn67h")

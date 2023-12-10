@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4g3ds0pi8a6f"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8ysvh"]
+height = 0.2
+radius = 0.02
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uppaf"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.2
+
+[node name="Nunchucks" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_8ysvh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_uppaf")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.204349, 0)
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("CylinderShape3D_8ysvh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("CylinderMesh_uppaf")
+
+[node name="JoltPinJoint3D" type="JoltPinJoint3D" parent="."]
+node_a = NodePath("..")
+node_b = NodePath("../RigidBody3D")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0992624, 0)

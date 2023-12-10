@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://7ovlalglt0po"]
+
+[ext_resource type="Script" path="res://game/components/player_controller_vr/PlayerController.gd" id="1_o3y0r"]
+[ext_resource type="PackedScene" uid="uid://dcrt5dhk246bk" path="res://game/assets/valve_hand_models/mesh/left_hand/left_hand.tscn" id="2_byesv"]
+[ext_resource type="PackedScene" uid="uid://cn0rrlwpbu5xw" path="res://game/tools/debug/button_visualizer/button_visualizer.tscn" id="2_pjnoc"]
+[ext_resource type="PackedScene" uid="uid://ccvl85qx2rdj8" path="res://game/assets/valve_hand_models/mesh/right_hand/right_hand.tscn" id="4_ipm4y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_31vmk"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.0901961)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hisqe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eq7px"]
+albedo_color = Color(0, 1, 0, 1)
+
+[node name="PlayerController" type="Node"]
+script = ExtResource("1_o3y0r")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="XROrigin3D/XRCamera3D"]
+light_color = Color(0.34902, 0.34902, 0.34902, 1)
+spot_range = 3.732
+
+[node name="XRLeft" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+pose = &"skeleton"
+
+[node name="left_hand" parent="XROrigin3D/XRLeft" instance=ExtResource("2_byesv")]
+
+[node name="vr_glove_left_slim" parent="XROrigin3D/XRLeft/left_hand/Armature_001/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_31vmk")
+
+[node name="ButtonVisualizer" parent="XROrigin3D/XRLeft" instance=ExtResource("2_pjnoc")]
+
+[node name="XRRigt" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+pose = &"skeleton"
+
+[node name="right_hand" parent="XROrigin3D/XRRigt" instance=ExtResource("4_ipm4y")]
+
+[node name="vr_glove_right_slim" parent="XROrigin3D/XRRigt/right_hand/Armature/Skeleton3D" index="0"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_31vmk")
+
+[node name="ButtonVisualizer" parent="XROrigin3D/XRRigt" instance=ExtResource("2_pjnoc")]
+
+[node name="debug_wrist_speed" type="Label3D" parent="XROrigin3D/XRRigt"]
+transform = Transform3D(5.22162e-17, -1.19457e-09, 0.0273285, -0.0273285, -1.19457e-09, 0, 1.19457e-09, -0.0273285, -1.19457e-09, 0.0438813, 0.00255363, 0)
+
+[node name="debug_offset" type="Label3D" parent="XROrigin3D/XRRigt"]
+transform = Transform3D(0.0273285, 5.12227e-09, 1.19457e-09, 5.12227e-09, -0.0273285, 1.19457e-09, 1.19457e-09, -1.19456e-09, -0.0273285, -0.0654792, 0.00255363, 0)
+
+[node name="debug_height" type="Label3D" parent="XROrigin3D/XRRigt"]
+transform = Transform3D(0.0273285, 5.12227e-09, 1.19457e-09, 5.12227e-09, -0.0273285, 1.19457e-09, 1.19457e-09, -1.19456e-09, -0.0273285, -0.0654792, 0.0218136, 0.0137886)
+
+[node name="OpenXRHandL" type="OpenXRHand" parent="XROrigin3D"]
+hand_skeleton = NodePath("../XRLeft/left_hand/Armature_001/Skeleton3D")
+
+[node name="OpenXRHandR" type="OpenXRHand" parent="XROrigin3D"]
+hand = 1
+hand_skeleton = NodePath("../XRRigt/right_hand/Armature/Skeleton3D")
+
+[node name="SmoothHelper" type="Marker3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SmoothHelper"]
+transform = Transform3D(0.0828967, 0, 0, 0, 0.0828967, 0, 0, 0, 0.4608, 0, 0.1775, 0)
+mesh = SubResource("BoxMesh_hisqe")
+surface_material_override/0 = SubResource("StandardMaterial3D_eq7px")
+
+[node name="hmd" type="Marker3D" parent="SmoothHelper"]
+
+[connection signal="button_pressed" from="XROrigin3D/XRLeft" to="." method="_on_xr_left_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/XRLeft" to="." method="_on_xr_left_button_released"]
+[connection signal="button_pressed" from="XROrigin3D/XRRigt" to="." method="_on_xr_rigt_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/XRRigt" to="." method="_on_xr_rigt_button_released"]
+
+[editable path="XROrigin3D/XRLeft/left_hand"]
+[editable path="XROrigin3D/XRRigt/right_hand"]

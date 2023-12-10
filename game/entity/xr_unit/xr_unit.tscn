@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://buvm570mnfk34"]
+
+[ext_resource type="Script" path="res://game/entity/xr_unit/xr_unit.gd" id="1_1pdi8"]
+[ext_resource type="PackedScene" uid="uid://cexa05vm1bw08" path="res://game/entity/xr_unit/HandRigid/hand_rigid.tscn" id="2_ywgk3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ytd2i"]
+radius = 0.15
+height = 0.6
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a8a2t"]
+height = 0.3
+radius = 0.15
+
+[sub_resource type="BoxMesh" id="BoxMesh_l4duo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3amcr"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4iit8"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_urrwp"]
+radius = 0.15
+height = 1.8
+
+[node name="xr_unit" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_1pdi8")
+
+[node name="CollisionCapsuleTop" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CapsuleShape3D_ytd2i")
+
+[node name="CollisionCylinder1" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CylinderShape3D_a8a2t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionCylinder1"]
+transform = Transform3D(0.489097, 0, 0, 0, 0.0828967, 0, 0, 0, 0.0828967, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_l4duo")
+surface_material_override/0 = SubResource("StandardMaterial3D_3amcr")
+
+[node name="CollisionCylinder2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CylinderShape3D_a8a2t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionCylinder2"]
+transform = Transform3D(0.0828967, 0, 0, 0, 0.0828967, 0, 0, 0, 0.4608, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_l4duo")
+surface_material_override/0 = SubResource("StandardMaterial3D_4iit8")
+
+[node name="CollisionCylinder3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CylinderShape3D_a8a2t")
+
+[node name="CollisionCylinder4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CylinderShape3D_a8a2t")
+
+[node name="CollisionCapsuleBot" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CapsuleShape3D_ytd2i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_urrwp")
+
+[node name="lhelper" type="Node3D" parent="."]
+
+[node name="rhelper" type="Node3D" parent="."]
+
+[node name="head" type="Node3D" parent="."]
+
+[node name="Hands" type="Node" parent="."]
+
+[node name="HandRigidR" parent="Hands" instance=ExtResource("2_ywgk3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246432, 0, 0)
+type = 1
+
+[node name="HandRigidL" parent="Hands" instance=ExtResource("2_ywgk3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.290335, 0, 0)

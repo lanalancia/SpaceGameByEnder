@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7gxtvu162ulh"]
+
+[ext_resource type="Script" path="res://game/components/GrabHandle/grab_handle.gd" id="1_3t4ia"]
+
+[node name="GrabHandle" type="Node" groups=["GrabHandle"]]
+script = ExtResource("1_3t4ia")
+
+[node name="RigidRef" type="Node3D" parent="."]
+
+[node name="GrabMarker" type="Marker3D" parent="RigidRef"]
